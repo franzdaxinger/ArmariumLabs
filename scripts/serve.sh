@@ -6,4 +6,4 @@ cd "$(dirname "$0")/.."
 ./scripts/setup_runtime.sh
 . .venv/bin/activate
 
-uvicorn backend.app.main:app --host 127.0.0.1 --port 8000 --reload
+exec uvicorn backend.app.main:app --host "${ARMARIUM_HOST:-127.0.0.1}" --port "${ARMARIUM_PORT:-8000}"

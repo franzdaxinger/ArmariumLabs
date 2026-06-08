@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SERVICE_NAME="${ARMARIUM_SERVICE_NAME:-armariumlabs.service}"
+
+usage() {
+  cat <<'TXT'
+Usage:
+  ArmariumLabs --status
+  ArmariumLabs --start
+  ArmariumLabs --stop
+  ArmariumLabs --restart
+  ArmariumLabs --logs
+
+Requires the systemd user service installed by:
+  scripts/install_user_service.sh
+TXT
+}
+
+require_systemctl() {
+  if ! command -v systemctl >/dev/null 2>&1; then
+    echo "systemctl not found. This control command requires systemd." >&2
+    exit 2
+  fi
+}
+
+case "${1:-}" in
+  --status)
+    require_systemctl
+    if systemctl --user is-active --quiet "$SERVICE_NAME"; then
+      echo "running"
+    else
+      echo "stopped"
+    fi
+    ;;
+  --start)
+    require_systemctl
+    systemctl --user start "$SERVICE_NAME"
+    echo "running"
+    ;;
+  --stop)
+    require_systemctl
+    systemctl --user stop "$SERVICE_NAME"
+    echo "stopped"
+    ;;
+  --restart)
+    require_systemctl
+    systemctl --user restart "$SERVICE_NAME"
+    echo "running"
+    ;;
+  --logs)
+    if ! command -v journalctl >/dev/null 2>&1; then
+      echo "journalctl not found." >&2
+      exit 2
+    fi
+    journalctl --user -u "$SERVICE_NAME" -n 80 --no-pager
+    ;;
+  --help|-h|"")
+    usage
+    ;;
+  *)
+    echo "Unknown option: $1" >&2
+    usage >&2
+    exit 2
+    ;;
+esac

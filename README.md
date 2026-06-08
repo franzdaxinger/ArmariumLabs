@@ -65,6 +65,25 @@ python scripts/armarium_cli.py add-review todo-app --decision approve --comment 
 python scripts/armarium_cli.py status todo-app
 ```
 
+## Local Service
+
+Install the systemd user service:
+
+```bash
+./scripts/install_user_service.sh
+```
+
+Then control the server from any shell:
+
+```bash
+ArmariumLabs --status
+ArmariumLabs --start
+ArmariumLabs --stop
+ArmariumLabs --logs
+```
+
+See `docs/service.md` for details.
+
 ## Terms
 
 - Bergfried: ArmariumLabs control center
