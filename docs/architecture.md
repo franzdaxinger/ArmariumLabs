@@ -20,6 +20,7 @@ ArmariumLabs v0.1 is a local FastAPI app with server-rendered HTML.
 - `project_service`: create works, list works, phase changes.
 - `review_service`: store reviews and append acceptance logs.
 - `bootstrap_service`: create the external folder layout and copy missing seed defaults.
+- `style_service`: store simple local review style signals per user.
 
 ## Pipeline Phases
 

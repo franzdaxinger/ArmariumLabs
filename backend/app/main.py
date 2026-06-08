@@ -14,7 +14,8 @@ settings = get_settings()
 templates = Jinja2Templates(directory=str(settings.repo_root / "backend" / "app" / "templates"))
 
 app = FastAPI(title="ArmariumLabs")
-app.add_middleware(SessionMiddleware, secret_key=settings.session_secret, same_site="lax")
+app.state.settings = settings
+app.add_middleware(SessionMiddleware, secret_key=settings.session_secret, same_site="lax", max_age=None)
 app.mount("/static", StaticFiles(directory=str(settings.repo_root / "backend" / "app" / "static")), name="static")
 
 

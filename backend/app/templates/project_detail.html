@@ -45,6 +45,16 @@
   </article>
 </section>
 
+<section class="panel">
+  <h2>Gemerkter Review-Stil</h2>
+  {% if review_style %}
+  <p>{{ review_style.style_summary }}</p>
+  <p class="muted">Wird lokal aus deinen bisherigen Abnahmen abgeleitet und später für passendere Lageberichte genutzt.</p>
+  {% else %}
+  <p class="muted">Noch kein Review-Stil gespeichert. ArmariumLabs merkt sich deinen Stil ab der ersten Abnahme.</p>
+  {% endif %}
+</section>
+
 <section class="columns">
   <article class="panel">
     <h2>Idee</h2>

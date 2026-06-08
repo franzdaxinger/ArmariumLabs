@@ -5,6 +5,10 @@ def test_slugify_work_id():
     assert slugify_work_id("Todo App!") == "todo-app"
 
 
+def test_slugify_work_id_transliterates_german_umlauts():
+    assert slugify_work_id("Schöne Bücher fürs Büro") == "schoene-buecher-fuers-buero"
+
+
 def test_validate_work_id_accepts_lowercase_digits_and_dashes():
     assert validate_work_id("todo-app-1") == "todo-app-1"
 

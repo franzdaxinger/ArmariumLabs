@@ -5,7 +5,7 @@ from pathlib import Path
 from ..config import REVIEW_DECISIONS, Settings
 from ..database import connect, init_db, row_to_review
 from ..models import Review
-from . import filesystem_service, project_service
+from . import filesystem_service, project_service, style_service
 from .filesystem_service import ValidationError
 
 
@@ -47,6 +47,7 @@ def add_review(settings: Settings, work_id: str, decision: str, comment: str, cr
         f"{review.comment}\n"
     )
     filesystem_service.append_text(Path(work.repo_path) / "docs" / "05_acceptance_log.md", entry)
+    style_service.update_review_style(settings, review)
     return review
 
 

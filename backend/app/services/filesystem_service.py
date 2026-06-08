@@ -14,6 +14,12 @@ class ValidationError(ValueError):
 
 def slugify_work_id(name: str) -> str:
     value = name.strip().lower()
+    value = (
+        value.replace("ä", "ae")
+        .replace("ö", "oe")
+        .replace("ü", "ue")
+        .replace("ß", "ss")
+    )
     value = re.sub(r"[^a-z0-9]+", "-", value)
     return value.strip("-")
 

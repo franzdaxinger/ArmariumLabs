@@ -47,6 +47,18 @@ def init_db(db_path: Path) -> None:
             )
             """
         )
+        conn.execute(
+            """
+            CREATE TABLE IF NOT EXISTS review_style_profiles (
+                created_by TEXT PRIMARY KEY,
+                review_count INTEGER NOT NULL,
+                average_comment_length REAL NOT NULL,
+                decision_counts_json TEXT NOT NULL,
+                style_summary TEXT NOT NULL,
+                updated_at TEXT NOT NULL
+            )
+            """
+        )
 
 
 def row_to_work(row: sqlite3.Row) -> Work:

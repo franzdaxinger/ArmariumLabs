@@ -2,8 +2,8 @@
 {% block title %}Login - ArmariumLabs{% endblock %}
 {% block content %}
 <section class="narrow">
-  <h1>Bergfried betreten</h1>
-  <p class="muted">Lokaler Login fuer ArmariumLabs.</p>
+  <h1>Herzlich Willkommen Sire</h1>
+  <p class="muted">Lokaler Zugang zum Bergfried.</p>
   {% if default_login %}
   <div class="warning">Default-Login aktiv: admin / 1. Bitte per Umgebungsvariablen ändern.</div>
   {% endif %}
@@ -15,7 +15,11 @@
     <label>Passwort
       <input name="password" type="password" autocomplete="current-password" required>
     </label>
-    <button class="button primary" type="submit">Einloggen</button>
+    <label class="check remember">
+      <input type="checkbox" name="remember_me" value="yes">
+      <span>Angemeldet bleiben</span>
+    </label>
+    <button class="button primary" type="submit">Bergfried betreten</button>
   </form>
 </section>
 {% endblock %}

@@ -4,7 +4,13 @@ import hashlib
 import hmac
 import os
 
+from itsdangerous import BadSignature, SignatureExpired, TimestampSigner
+
 from .config import Settings
+
+
+REMEMBER_COOKIE_NAME = "armarium_remember"
+REMEMBER_COOKIE_MAX_AGE = 60 * 60 * 24 * 30
 
 
 def hash_password(password: str, salt: bytes | None = None) -> str:
@@ -33,3 +39,19 @@ def admin_password_hash(settings: Settings) -> str:
 
 def authenticate(username: str, password: str, settings: Settings) -> bool:
     return username == settings.admin_username and verify_password(password, admin_password_hash(settings))
+
+
+def create_remember_token(username: str, settings: Settings) -> str:
+    signer = TimestampSigner(settings.session_secret, salt="armarium-remember")
+    return signer.sign(username.encode("utf-8")).decode("utf-8")
+
+
+def verify_remember_token(token: str, settings: Settings) -> str | None:
+    signer = TimestampSigner(settings.session_secret, salt="armarium-remember")
+    try:
+        username = signer.unsign(token, max_age=REMEMBER_COOKIE_MAX_AGE).decode("utf-8")
+    except (BadSignature, SignatureExpired):
+        return None
+    if username != settings.admin_username:
+        return None
+    return username

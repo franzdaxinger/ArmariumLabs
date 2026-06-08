@@ -13,7 +13,7 @@
       {% if request.session.get("user") %}
       <span class="user">{{ request.session.get("user") }}</span>
       <form action="/logout" method="post">
-        <button class="button secondary" type="submit">Logout</button>
+        <button class="button secondary" type="submit">Burg verlassen</button>
       </form>
       {% endif %}
     </div>

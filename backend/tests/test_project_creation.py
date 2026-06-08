@@ -22,6 +22,15 @@ def test_create_work_from_template(settings):
         assert (scriptorium / name).is_dir()
 
 
+def test_create_work_allows_umlauts_in_human_text(settings):
+    work = project_service.create_work(settings, "Schöne Bücher", "", "Idee mit äöü und ß", "Muss schön bleiben")
+
+    assert work.work_id == "schoene-buecher"
+    assert work.name == "Schöne Bücher"
+    assert "äöü" in (Path(work.repo_path) / "docs" / "00_idee.md").read_text(encoding="utf-8")
+    assert "schön" in (Path(work.repo_path) / "docs" / "01_hard_requirements.md").read_text(encoding="utf-8")
+
+
 def test_create_work_prevents_duplicates(settings):
     project_service.create_work(settings, "Todo App", "todo-app", "Simple todo app")
     try:

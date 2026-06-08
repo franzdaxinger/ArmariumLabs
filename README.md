@@ -46,6 +46,8 @@ export ARMARIUM_ADMIN_PASSWORD="change-me"
 export ARMARIUM_SESSION_SECRET="change-this-secret"
 ```
 
+The login form has an optional remember-me checkbox. Without it, the browser session is temporary. With it, ArmariumLabs stores a signed local cookie for 30 days.
+
 ## Test
 
 ```bash
@@ -93,3 +95,7 @@ See `docs/service.md` for details.
 - Personen: reusable rules and perspectives
 - Abnahme: review
 - Lagebericht: review or status report
+
+## Local Review Style
+
+ArmariumLabs stores a small local review style profile per user. It records simple signals such as review count, average comment length, and decision patterns. This is intentionally not an AI feature in v0.1; it is a transparent basis for future review assistance.

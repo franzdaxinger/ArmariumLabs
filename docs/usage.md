@@ -22,6 +22,8 @@ python scripts/bootstrap.py
 
 If no environment variables are set, the local default is `admin` / `1`. This is only for first local startup and should be changed.
 
+The login page offers "Angemeldet bleiben". If selected, ArmariumLabs uses a signed local remember-me cookie for 30 days. "Burg verlassen" removes it.
+
 ## Creating a Werk
 
 The form accepts:
@@ -40,6 +42,8 @@ Creating a Werk copies the selected Bauplan, creates the Skriptorium folder tree
 ## Reviews
 
 Reviews are text-based. Every decision is stored in SQLite and appended to `docs/05_acceptance_log.md` inside the Werk repository.
+
+ArmariumLabs also updates a small local review style profile for the current user. It records simple, inspectable signals from review comments so future versions can better match the user's preferred review style.
 
 Allowed decisions:
 

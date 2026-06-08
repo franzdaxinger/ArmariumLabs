@@ -7,7 +7,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 
 from ..config import DECISION_LABELS, PHASE_LABELS, PHASES, Settings
-from ..services import git_service, persona_service, project_service, review_service
+from ..services import git_service, persona_service, project_service, review_service, style_service
 from ..services.filesystem_service import ValidationError
 from .common import require_login
 
@@ -90,6 +90,7 @@ def router(settings: Settings, templates: Jinja2Templates) -> APIRouter:
                 "hard_requirements": project_service.read_work_file(work, "docs/01_hard_requirements.md"),
                 "active_personas": active_personas,
                 "reviews": reviews,
+                "review_style": style_service.get_review_style(settings, str(user)),
                 "decision_labels": DECISION_LABELS,
                 "next_action": project_service.next_action_for_phase(work.phase, last.decision if last else None),
             },
