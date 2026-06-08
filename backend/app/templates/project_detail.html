@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}{{ work.name }} - ArmariumLabs{% endblock %}
+{% block content %}
+<section class="hero compact">
+  <div>
+    <h1>{{ work.name }}</h1>
+    <p>{{ work.work_id }} · {{ phase_label }} · Git: {{ git_status }}</p>
+  </div>
+  <a class="button secondary" href="/">Zur Übersicht</a>
+</section>
+
+<section class="columns">
+  <article class="panel">
+    <h2>Lage</h2>
+    <dl>
+      <dt>Repo-Pfad</dt><dd>{{ work.repo_path }}</dd>
+      <dt>Skriptorium</dt><dd>{{ work.scriptorium_path }}</dd>
+      <dt>Nächste Aktion</dt><dd>{{ next_action }}</dd>
+    </dl>
+    <form class="inline-form" method="post" action="/works/{{ work.work_id }}/phase">
+      <label>Pipeline-Stufe
+        <select name="phase">
+          {% for phase in phases %}
+          <option value="{{ phase }}" {% if phase == work.phase %}selected{% endif %}>{{ phase_labels[phase] }}</option>
+          {% endfor %}
+        </select>
+      </label>
+      <button class="button primary" type="submit">Phase setzen</button>
+    </form>
+  </article>
+
+  <article class="panel">
+    <h2>Personen</h2>
+    {% for persona in active_personas %}
+    <div class="persona">
+      <h3>{{ persona.name }}</h3>
+      <p class="muted">{{ persona.titel }}</p>
+      <ul>
+        {% for rule in persona.regeln %}
+        <li>{{ rule }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </article>
+</section>
+
+<section class="columns">
+  <article class="panel">
+    <h2>Idee</h2>
+    <pre>{{ idea }}</pre>
+  </article>
+  <article class="panel">
+    <h2>Harte Requirements</h2>
+    <pre>{{ hard_requirements }}</pre>
+  </article>
+</section>
+
+{% include "review_form.html" %}
+
+<section class="panel">
+  <h2>Abnahmehistorie</h2>
+  {% if reviews %}
+  {% for review in reviews %}
+  <article class="review">
+    <strong>{{ decision_labels.get(review.decision, review.decision) }}</strong>
+    <span class="muted">{{ review.stage }} · {{ review.created_at }} · {{ review.created_by }}</span>
+    <p>{{ review.comment }}</p>
+  </article>
+  {% endfor %}
+  {% else %}
+  <p class="muted">Noch keine Reviews.</p>
+  {% endif %}
+</section>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<section class="hero">
+  <div>
+    <h1>ArmariumLabs</h1>
+    <p>Bergfried der Werke</p>
+  </div>
+  <a class="button primary" href="/works/new">Neues Werk anlegen</a>
+</section>
+
+{% if works %}
+<section class="grid">
+  {% for item in works %}
+  <article class="card">
+    <div class="card-header">
+      <div>
+        <h2><a href="/works/{{ item.work.work_id }}">{{ item.work.name }}</a></h2>
+        <p class="muted">{{ item.work.work_id }}</p>
+      </div>
+      <span class="status {{ item.git_status }}">{{ item.git_status }}</span>
+    </div>
+    <dl>
+      <dt>Pipeline</dt><dd>{{ item.phase_label }}</dd>
+      <dt>Letzte Abnahme</dt><dd>{{ item.last_review }}</dd>
+      <dt>Nächste Aktion</dt><dd>{{ item.next_action }}</dd>
+      <dt>Letzte Änderung</dt><dd>{{ item.work.updated_at }}</dd>
+    </dl>
+  </article>
+  {% endfor %}
+</section>
+{% else %}
+<section class="empty">
+  <h2>Noch keine Werke</h2>
+  <p>Lege das erste Werk an, um Idee, Bauplan, Skriptorium und Abnahmen zu verwalten.</p>
+</section>
+{% endif %}
+{% endblock %}

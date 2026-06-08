@@ -1,0 +1,14 @@
+<section class="panel">
+  <h2>Abnahme dokumentieren</h2>
+  <form class="form" method="post" action="/works/{{ work.work_id }}/reviews">
+    <label>Kommentar
+      <textarea name="comment" rows="5" required></textarea>
+    </label>
+    <div class="actions">
+      <button class="button primary" name="decision" value="approve" type="submit">Freigeben</button>
+      <button class="button secondary" name="decision" value="request_changes" type="submit">Änderungen anfordern</button>
+      <button class="button secondary" name="decision" value="comment" type="submit">Kommentar speichern</button>
+      <button class="button secondary" name="decision" value="defer" type="submit">Zurückstellen</button>
+    </div>
+  </form>
+</section>

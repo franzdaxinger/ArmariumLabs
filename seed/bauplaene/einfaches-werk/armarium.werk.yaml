@@ -1,0 +1,7 @@
+work_id: "{{WORK_ID}}"
+name: "{{WORK_NAME}}"
+phase: "ideation"
+scriptorium_path: "{{SCRIPTORIUM_PATH}}"
+created_at: "{{CREATED_AT}}"
+active_personas:
+  - schatzmeister

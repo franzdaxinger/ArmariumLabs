@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}Neues Werk - ArmariumLabs{% endblock %}
+{% block content %}
+<section class="narrow">
+  <h1>Neues Werk anlegen</h1>
+  {% if error %}<div class="error">{{ error }}</div>{% endif %}
+  <form class="form" method="post" action="/works">
+    <label>Name
+      <input name="name" value="{{ form.get('name', '') if form else '' }}" required>
+    </label>
+    <label>Repo name / Work ID
+      <input name="work_id" value="{{ form.get('work_id', '') if form else '' }}" placeholder="wird aus Name erzeugt">
+    </label>
+    <label>Kurze Idee/Beschreibung
+      <textarea name="idea" rows="5" required>{{ form.get('idea', '') if form else '' }}</textarea>
+    </label>
+    <label>Optionale harte Requirements
+      <textarea name="hard_requirements" rows="5">{{ form.get('hard_requirements', '') if form else '' }}</textarea>
+    </label>
+    <label>Bauplan
+      <select name="template_id">
+        {% for template in templates %}
+        <option value="{{ template }}" {% if template == default_template %}selected{% endif %}>{{ template }}</option>
+        {% endfor %}
+      </select>
+    </label>
+    <fieldset>
+      <legend>Personen</legend>
+      {% for persona in personas %}
+      <label class="check">
+        <input type="checkbox" name="personas" value="{{ persona.id }}" {% if persona.id in selected_personas %}checked{% endif %}>
+        <span>{{ persona.name }} - {{ persona.titel }}</span>
+      </label>
+      {% endfor %}
+    </fieldset>
+    <div class="actions">
+      <button class="button primary" type="submit">Werk anlegen</button>
+      <a class="button secondary" href="/">Abbrechen</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

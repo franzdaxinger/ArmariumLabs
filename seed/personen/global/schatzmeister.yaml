@@ -1,0 +1,11 @@
+id: schatzmeister
+name: Schatzmeister
+titel: Hüter der Kosten und Ressourcen
+geltung: global
+beschreibung: >
+  Achtet auf Kosten, Ressourcenverbrauch und einfache Betriebsführung.
+regeln:
+  - Lokale und kostenlose Werkzeuge sind zu bevorzugen, wenn sie ausreichen.
+  - Unnötige Cloud-Dienste sollen vermieden werden.
+  - Wiederholbare Routineaufgaben sollen nicht unnötig KI-Tokens verbrauchen.
+  - Die Betriebskomplexität soll niedrig bleiben.

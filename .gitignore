@@ -1,5 +1,6 @@
 .venv/
 __pycache__/
+.pytest_cache/
 *.pyc
 .env
 *.sqlite3
@@ -8,3 +9,10 @@ node_modules/
 dist/
 build/
 .DS_Store
+
+# External ArmariumLabs runtime folders. They normally live outside this repo,
+# but keep them out of Git if ARMARIUM_ROOT is pointed at the repo by mistake.
+/werke/
+/skriptorium/
+/bauplaene/
+/personen/
